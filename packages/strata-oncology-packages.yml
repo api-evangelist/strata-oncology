@@ -1,0 +1,47 @@
+generated: '2026-08-02'
+method: searched
+source: public package registry search + https://github.com/StrataOncology
+packages: []
+note: >-
+  Strata Oncology publishes no first-party client libraries or SDKs. Their public GitHub organization holds
+  seven repositories, six of which are forks of third-party tooling; the single original repository,
+  immune-response-score, is a Python research repository for the Immunotherapy Response Score and is not a
+  client library for any API. No SDKs pointer is wired into apis.yml.
+registries_checked:
+- registry: npm
+  query: strata-oncology / strataoncology
+  result: no first-party package (all "strata"-named packages belong to unrelated projects)
+- registry: pypi
+  queries:
+  - strata-oncology
+  - strataoncology
+  - strata-ngs
+  result: 404 on all
+- registry: github
+  org: https://github.com/StrataOncology
+  public_repos: 7
+  original_repos:
+  - name: immune-response-score
+    url: https://github.com/StrataOncology/immune-response-score
+    language: Python
+    last_push: '2023-01-06'
+    official: true
+    client_library: false
+    note: research code for the Immunotherapy Response Score, not an API client
+  forked_repos:
+  - flask-restplus
+  - react-data-grid
+  - jsPDF
+  - pre-commit-black-docker
+  - mirrors-prettier
+  - karmabot
+- registry: maven-central
+  result: not searched - no JVM surface indicated anywhere on the provider's site or GitHub org
+- registry: nuget
+  result: not searched - no .NET surface indicated
+- registry: rubygems
+  result: not searched - no Ruby surface indicated
+- registry: packagist
+  result: not searched - no PHP client surface indicated
+- registry: crates.io
+  result: not searched - no Rust surface indicated

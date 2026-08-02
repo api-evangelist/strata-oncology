@@ -1,0 +1,112 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/strata-oncology-content-api-openapi.yml + live response headers observed 2026-08-02
+api: Strata Oncology Website Content API
+note: >-
+  Strata Oncology publishes no API conventions documentation. Everything below was derived from the live
+  behaviour of https://strataoncology.com/wp-json and from the WordPress REST discovery document, and is
+  scoped to that surface only.
+authentication:
+  style: none for the public read surface
+  detail: authentication/strata-oncology-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key header or parameter is offered or documented. The public surface is read-only, so no
+    Idempotency pointer is wired into apis.yml.
+pagination:
+  style: page-number
+  parameters:
+  - name: page
+    in: query
+    default: 1
+    description: One-based page number.
+  - name: per_page
+    in: query
+    default: 10
+    maximum: 100
+    description: Items per page.
+  - name: offset
+    in: query
+    description: Skip a number of items, as an alternative to page.
+  response_headers:
+  - name: X-WP-Total
+    description: Total number of items matching the query.
+  - name: X-WP-TotalPages
+    description: Total number of pages available.
+  - name: Link
+    description: RFC 8288 rel="next" / rel="prev" page links.
+  evidence: >-
+    GET /wp/v2/pages?per_page=2 returned x-wp-total 12, x-wp-totalpages 6 and
+    Link <https://strataoncology.com/wp-json/wp/v2/pages?per_page=2&page=2>; rel="next".
+  custom_namespace_note: >-
+    The custom /api/publications and /api/resources endpoints do NOT use these parameters; they return
+    pre-paged sections carrying currentPage, totalPosts, totalPages and postsPerPage inside the body.
+filtering_and_sorting:
+  parameters:
+  - search
+  - slug
+  - include
+  - exclude
+  - order
+  - orderby
+  - after
+  - before
+  - modified_after
+  - modified_before
+  - status
+  note: Per-type taxonomy filters also exist, e.g. publication_type on /publications.
+field_selection:
+  supported: partial
+  note: >-
+    WordPress REST supports the _fields query parameter for sparse fieldsets and _embed for embedding linked
+    resources, but neither is registered in the discovery document's args, so they are not asserted in the
+    OpenAPI.
+hypermedia:
+  style: HAL-like
+  field: _links
+  note: Every content object carries a _links object pointing at self, collection and related resources.
+error_envelope:
+  format: proprietary WordPress REST envelope (not RFC 9457 / application/problem+json)
+  content_type: application/json
+  shape:
+    code: machine-readable error code string
+    message: human-readable message
+    data:
+      status: HTTP status code, repeated in the body
+  example:
+    code: rest_no_route
+    message: No route was found matching the URL and request method.
+    data:
+      status: 404
+  catalog: errors/strata-oncology-problem-types.yml
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  additional_namespaces:
+  - api
+  - oembed/1.0
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  note: >-
+    Versioning follows upstream WordPress, not a Strata Oncology policy. The custom `api` namespace is
+    unversioned. See lifecycle/strata-oncology-lifecycle.yml.
+rate_limiting:
+  documented: false
+  signal_headers: []
+  note: No rate-limit headers were observed on any response and no policy is published.
+request_tracing:
+  request_id_header: none observed
+cors:
+  access_control_expose_headers:
+  - X-WP-Total
+  - X-WP-TotalPages
+  - Link
+  access_control_allow_headers:
+  - Authorization
+  - X-WP-Nonce
+  - Content-Disposition
+  - Content-MD5
+  - Content-Type

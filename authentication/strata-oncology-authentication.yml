@@ -1,0 +1,46 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/strata-oncology-content-api-openapi.yml + live probes
+summary:
+  types: []
+  api_key_in: []
+  oauth2_flows: []
+note: >-
+  Strata Oncology publishes no API authentication documentation. The one public API surface - the WordPress
+  REST content API at https://strataoncology.com/wp-json - serves its read collections anonymously with no
+  credential of any kind, so its OpenAPI declares no securitySchemes. Because the provider does not document
+  an authentication model, no `Authentication` pointer is wired into apis.yml; this file records the observed
+  reality rather than asserting a documented auth posture.
+schemes: []
+observed:
+- surface: Website content API
+  base_url: https://strataoncology.com/wp-json
+  authentication: none
+  evidence: >-
+    GET /wp/v2/pages, /wp/v2/publications, /wp/v2/resources, /wp/v2/team and /api/publications all returned
+    200 with no Authorization header on 2026-08-02.
+  privileged_routes: >-
+    The same namespace registers write methods and privileged collections; GET /wp/v2/users returned 401
+    rest_user_cannot_view anonymously. WordPress core authentication (cookie + X-WP-Nonce, or application
+    passwords) governs those, but Strata Oncology documents none of it publicly.
+  cors_allowed_headers:
+  - Authorization
+  - X-WP-Nonce
+  - Content-Disposition
+  - Content-MD5
+  - Content-Type
+- surface: Strata Request Portal
+  url: https://portal.strataoncology.com/
+  authentication: credentialed web login (account requested via https://strataoncology.com/create-account/)
+  machine_readable_contract: none
+  evidence: >-
+    Single-page app on S3/CloudFront; /.well-known/openid-configuration, /.well-known/oauth-authorization-server
+    and /.well-known/oauth-protected-resource all returned 403 (S3 AccessDenied), i.e. no OIDC or OAuth
+    discovery document is published.
+- surface: Strata Assistant (Epic App Orchard)
+  authentication: governed by Epic's app distribution model
+  machine_readable_contract: none
+  evidence: >-
+    Announced 2021-05-18 as an app integrated within Epic to pre-populate StrataNGS requisitions from EMR data.
+    Strata Oncology's announcement names no integration standard (no SMART on FHIR / HL7 FHIR claim), and no
+    public contract is published.

@@ -1,0 +1,52 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Strata Oncology Website Content API
+  version: 1.0.0
+extends: openapi/strata-oncology-content-api-openapi.yml
+x-generated: '2026-08-02'
+x-method: generated
+x-source: >-
+  API Evangelist enrichment pipeline. Records the classification and cross-links this network adds on top of
+  the spec derived from https://strataoncology.com/wp-json/. The underlying OpenAPI is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: strata-oncology
+    x-apievangelist-surface: website-content
+    x-apievangelist-note: >-
+      Derived, not provider-published. This is the marketing website's content API; Strata Oncology's clinical
+      ordering and results surfaces publish no machine-readable contract.
+    x-artifacts:
+      conventions: conventions/strata-oncology-conventions.yml
+      errors: errors/strata-oncology-problem-types.yml
+      lifecycle: lifecycle/strata-oncology-lifecycle.yml
+      conformance: conformance/strata-oncology-conformance.yml
+      authentication: authentication/strata-oncology-authentication.yml
+      data_model: data-model/strata-oncology-data-model.yml
+      skills: skills/_index.yml
+- target: $.info
+  update:
+    x-industry:
+    - Healthcare
+    - Life Sciences
+    x-sector: Precision Oncology Diagnostics
+- target: $.paths['/publications'].get
+  update:
+    x-apievangelist-primary: true
+    x-apievangelist-note: >-
+      The highest-value operation on this surface: Strata Oncology's press releases and published research,
+      filterable by publication_type and date, with total counts in X-WP-Total.
+- target: $.paths['/team'].get
+  update:
+    x-apievangelist-note: Leadership and team profiles, the machine-readable form of https://strataoncology.com/about/.
+- target: $.paths['/api/publications'].get
+  update:
+    x-apievangelist-note: >-
+      Custom theme endpoint. Pre-paged display sections rather than entities; prefer /publications for
+      programmatic access.
+- target: $.components.schemas.Error
+  update:
+    x-rfc9457: false
+    x-apievangelist-note: >-
+      Proprietary WordPress error envelope. A provider-side improvement would be application/problem+json per
+      RFC 9457.

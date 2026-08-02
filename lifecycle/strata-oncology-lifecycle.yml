@@ -1,0 +1,36 @@
+generated: '2026-08-02'
+method: searched
+source: https://strataoncology.com/ + live probes 2026-08-02
+note: >-
+  Strata Oncology runs no developer program, so there is no API versioning policy, deprecation policy, SLA or
+  status page to capture. The findings below are recorded as verified absences. No StatusPage or Deprecation
+  pointer is wired into apis.yml, because neither exists.
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  policy_url: null
+  owned_by_provider: false
+  note: >-
+    Versioning of the only public surface is inherited from upstream WordPress core, not set by a Strata
+    Oncology policy. The custom `api` namespace is unversioned.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: No RFC 8594 Sunset or Deprecation headers were observed on any response.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - url: https://status.strataoncology.com/
+    status: 'DNS did not resolve'
+changelog:
+  api_changelog_url: null
+  company_news_url: https://strataoncology.com/news-and-publications/
+  company_news_feed: https://strataoncology.com/feed/
+  note: >-
+    The News & Publications index is a dated company press-release feed, not an API changelog. Most recent
+    entry observed 2025-04-25 (independent evaluation of the ADC predictive biomarker).
+deprecated_operations: []

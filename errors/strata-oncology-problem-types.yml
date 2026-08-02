@@ -1,0 +1,45 @@
+generated: '2026-08-02'
+method: derived
+source: live error responses observed on https://strataoncology.com/wp-json on 2026-08-02
+format: proprietary
+format_note: >-
+  Not RFC 9457. Errors are returned as application/json using the WordPress REST envelope
+  {code, message, data:{status}}; there is no `type` URI, no `title`/`detail` split and no
+  application/problem+json media type.
+envelope:
+  code: string, machine-readable error code
+  message: string, human-readable message
+  data.status: integer, HTTP status repeated in the body
+problems:
+- code: rest_no_route
+  status: 404
+  title: No route was found matching the URL and request method.
+  remediation: Check the namespace and path against https://strataoncology.com/wp-json/.
+  observed_on: GET /wp-json/nope/v1/thing
+  method: probed
+- code: rest_post_invalid_id
+  status: 404
+  title: Invalid post ID.
+  remediation: The numeric id does not exist or is not readable anonymously. List the collection first.
+  observed_on: GET /wp-json/wp/v2/pages/999999999
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#getPage
+  method: probed
+- code: rest_user_cannot_view
+  status: 401
+  title: Sorry, you are not allowed to list users.
+  remediation: >-
+    The route requires an authenticated WordPress session. It is outside the public read surface described in
+    openapi/strata-oncology-content-api-openapi.yml.
+  observed_on: GET /wp-json/wp/v2/users
+  method: probed
+- code: rest_invalid_param
+  status: 400
+  title: Invalid parameter(s).
+  remediation: >-
+    Returned when a query parameter fails the type/enum/range validation declared in the discovery document
+    (e.g. per_page above 100, or an orderby value outside the enum).
+  method: derived
+  derived_from: https://strataoncology.com/wp-json/ parameter schemas
+  note: Not exercised live; declared by the discovery document's argument validation.
+not_documented_by_provider: true
+provider_error_reference: null

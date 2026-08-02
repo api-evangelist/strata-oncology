@@ -1,0 +1,138 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/strata-oncology-content-api-openapi.yml + https://strataoncology.com/wp-json/
+api: Strata Oncology Website Content API
+note: >-
+  The entity graph of the public content API. Custom content types (publication, resource, team_member,
+  testimonial) are Strata Oncology's own; the rest are WordPress core types. Identifiers are integers, not
+  prefixed strings.
+entities:
+- name: publication
+  collection: /publications
+  description: A press release or published research listing shown on the News & Publications page.
+  id: integer
+  operations:
+  - listPublications
+  - getPublication
+  observed_count: 57 press releases across 19 pages (via /api/publications)
+  key_fields:
+  - id
+  - slug
+  - title.rendered
+  - content.rendered
+  - excerpt.rendered
+  - date
+  - modified
+  - link
+  - featured_media
+  - publication_type
+- name: resource
+  collection: /resources
+  description: A patient or provider resource document (e.g. patient billing, product information).
+  id: integer
+  operations:
+  - listResources
+  - getResource
+  observed_count: 7 product-information items across 3 pages (via /api/resources)
+- name: team_member
+  collection: /team
+  description: A leadership or team profile, rendered at /team/<slug>/.
+  id: integer
+  operations:
+  - listTeam
+  - getTeammember
+- name: testimonial
+  collection: /testimonials
+  description: A published testimonial.
+  id: integer
+  operations:
+  - listTestimonials
+  - getTestimonial
+- name: page
+  collection: /pages
+  description: A website page. 12 pages were observed.
+  id: integer
+  operations:
+  - listPages
+  - getPage
+- name: post
+  collection: /posts
+  description: A core blog post. The collection is empty - Strata Oncology uses publications instead.
+  id: integer
+  operations:
+  - listPosts
+  - getPost
+- name: media
+  collection: /media
+  description: An uploaded media item (images, PDFs).
+  id: integer
+  operations:
+  - listMedia
+  - getMediaitem
+- name: category
+  collection: /categories
+  description: A category taxonomy term.
+  id: integer
+  operations:
+  - listCategories
+  - getCategory
+- name: tag
+  collection: /tags
+  description: A tag taxonomy term.
+  id: integer
+  operations:
+  - listTags
+  - getTag
+- name: publication_type
+  description: >-
+    A taxonomy term classifying publications (the filter behind the "Press releases" section and the
+    btnParam values returned by /api/publications). Exposed as the publication_type query filter rather than
+    as its own registered REST collection.
+  discovered_via: /taxonomies
+relationships:
+- from: publication
+  to: media
+  type: has_one
+  via: featured_media
+- from: publication
+  to: publication_type
+  type: has_many
+  via: publication_type
+- from: resource
+  to: media
+  type: has_one
+  via: featured_media
+- from: team_member
+  to: media
+  type: has_one
+  via: featured_media
+- from: page
+  to: page
+  type: belongs_to
+  via: parent
+- from: page
+  to: media
+  type: has_one
+  via: featured_media
+- from: post
+  to: category
+  type: has_many
+  via: categories
+- from: post
+  to: tag
+  type: has_many
+  via: tags
+hypermedia:
+  field: _links
+  note: >-
+    Every content object carries _links with self, collection, about (its type), wp:featuredmedia and
+    wp:attachment relations, so the graph above is traversable at runtime without out-of-band knowledge.
+composite_views:
+- name: ThemeSectionsResponse
+  operations:
+  - themePublications
+  - themeResources
+  description: >-
+    The custom `api` namespace flattens publications/resources into pre-paged display sections
+    (name, btnParam, currentPage, totalPosts, totalPages, postsPerPage, posts[]) rather than returning the
+    entities above. It is a presentation projection, not a separate entity.

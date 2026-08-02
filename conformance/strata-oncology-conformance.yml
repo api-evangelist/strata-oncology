@@ -1,0 +1,74 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/strata-oncology-content-api-openapi.yml + live probes + https://strataoncology.com/
+scope: >-
+  Assertions cover the one public machine-readable surface (the website content API) and the company's
+  published regulatory posture. Strata Oncology's clinical surfaces (Strata Request Portal, Strata Assistant
+  for Epic) publish no machine-readable contract, so no technical conformance can be asserted about them.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    The provider publishes no OpenAPI. openapi/strata-oncology-content-api-openapi.yml is derived by API
+    Evangelist from the live WordPress REST discovery document, not published by Strata Oncology.
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 securityScheme; /.well-known/oauth-authorization-server 404/403 on every host
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration 404 on strataoncology.com, 403 on portal.strataoncology.com
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use the WordPress {code,message,data.status} envelope as application/json, not
+    application/problem+json. See errors/strata-oncology-problem-types.yml.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on strataoncology.com and 403 on portal.strataoncology.com
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation headers observed
+- id: rfc8288-web-linking
+  conforms: true
+  evidence: >-
+    Collection responses return Link headers with rel="next"/rel="prev";
+    observed on GET /wp-json/wp/v2/pages?per_page=2
+- id: rfc8615-well-known
+  conforms: false
+  evidence: no /.well-known/ document served on any host; see well-known/strata-oncology-well-known.yml
+- id: hl7-fhir
+  conforms: unknown
+  evidence: >-
+    Strata Assistant is distributed through the Epic App Orchard, but Strata Oncology's own announcement names
+    no integration standard and no SMART on FHIR or FHIR conformance statement is published. Probing
+    /.well-known/smart-configuration on portal.strataoncology.com returned 403. Recorded as unknown rather
+    than false - absence of a public claim is not evidence of absence in an Epic-distributed app.
+- id: asyncapi
+  conforms: false
+  evidence: no event, streaming or webhook surface found; not applicable to this provider
+- id: mcp
+  conforms: false
+  evidence: no MCP server found on any host
+- id: a2a
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json missed on every host
+regulatory:
+- id: clia
+  conforms: true
+  evidence: >-
+    Strata Oncology states it operates a high-throughput CLIA laboratory for genomic sequencing
+    (https://strataoncology.com/about/).
+- id: hipaa
+  conforms: true
+  evidence: >-
+    Publishes a Notice of Privacy Practices at https://strataoncology.com/privacy-practices/, the HIPAA
+    covered-entity disclosure.
+- id: no-surprises-act
+  conforms: true
+  evidence: https://strataoncology.com/no-surprises-act/
+certifications_published:
+- CLIA
+security_certifications_published: []
+security_certifications_note: >-
+  No SOC 2, ISO 27001, PCI DSS, FedRAMP or CSA STAR certification is published, and no trust center exists;
+  probe-security-programs.py returned vdp=none trust=none. No TrustCenter pointer is wired.

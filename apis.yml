@@ -1,18 +1,64 @@
 aid: strata-oncology
 name: Strata Oncology
-description: 'Strata Oncology is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Strata Oncology is a precision oncology company founded in 2015 by Dan Rhodes and Scott Tomlins
+  and headquartered in Ann Arbor, Michigan. It develops and runs predictive biomarker tests out of its own
+  high-throughput CLIA laboratory, including StrataNGS tumor genomic profiling, the Immunotherapy Response
+  Score for anti-PD-1/PD-L1 monotherapy benefit, PD-L1 IHC testing, and Antibody-Drug Conjugate Treatment
+  Response Scores. Testing is delivered to health systems through the Strata Precision Oncology Network,
+  with ordering and results handled through the login-gated Strata Request Portal and the Strata Assistant
+  app distributed in the Epic App Orchard. Strata Oncology publishes no public developer program or API
+  documentation; the only anonymous machine-readable surface API Evangelist could verify is the WordPress
+  REST content API behind strataoncology.com.'
+image: https://strataoncology.com/wp-content/uploads/2022/09/Strata-Oncology-Logo_Symbol-Dark-Theme.svg
 url: https://raw.githubusercontent.com/api-evangelist/strata-oncology/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment
 specificationVersion: '0.20'
 created: '2026-08-02'
 modified: '2026-08-02'
+x-enrichment:
+  date: '2026-08-02'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
 tags:
 - Company
-apis: []
+- Healthcare
+- Precision Medicine
+- Oncology
+- Genomics
+- Diagnostics
+- Laboratory
+- Life Sciences
+- Biomarkers
+- Clinical Trials
+apis:
+- aid: strata-oncology-content-api
+  name: Strata Oncology Website Content API
+  description: 'The public, anonymous, read-only content API behind strataoncology.com. It is the standard
+    WordPress REST API (wp/v2 namespace) exposing the company''s publications, resources, team profiles,
+    testimonials, pages, posts, media and taxonomies, plus two custom endpoints in an "api" namespace that the
+    site theme calls to render the News & Publications and Resources pages. This is the marketing website''s
+    content API, not a clinical, laboratory or ordering API - Strata Oncology publishes no public clinical API.'
+  humanURL: https://strataoncology.com/wp-json/
+  baseURL: https://strataoncology.com/wp-json
+  tags:
+  - Content
+  - Publications
+  - Resources
+  - WordPress
+  - Website
+  properties:
+  - type: OpenAPI
+    url: openapi/strata-oncology-content-api-openapi.yml
+  - type: Overlay
+    url: overlays/strata-oncology-content-api-overlay.yaml
+  - type: ErrorCatalog
+    url: errors/strata-oncology-problem-types.yml
+  - type: DataModel
+    url: data-model/strata-oncology-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +66,54 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
+  url: https://strataoncology.com/
+- type: About
+  url: https://strataoncology.com/about/
+- type: Contact
+  url: https://strataoncology.com/contact-us/
+- type: Blog
+  name: News & Publications
+  url: https://strataoncology.com/news-and-publications/
+- type: BlogRSS
+  url: https://strataoncology.com/feed/
+- type: SignUp
+  name: Create a Strata Request Portal account
+  url: https://strataoncology.com/create-account/
+- type: Login
+  name: Strata Request Portal
+  url: https://portal.strataoncology.com/
+- type: TermsOfService
+  url: https://strataoncology.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://strataoncology.com/privacy-policy/
+- type: Compliance
+  name: HIPAA Notice of Privacy Practices
+  url: https://strataoncology.com/privacy-practices/
+- type: NoSurprisesAct
+  url: https://strataoncology.com/no-surprises-act/
+- type: Billing
+  name: Patient Billing and Financial Assistance
+  url: https://strataoncology.com/resources/patient-billing/
+- type: GitHubOrganization
+  url: https://github.com/StrataOncology
+- type: LinkedIn
+  url: https://www.linkedin.com/company/strata-oncology/
+- type: Twitter
+  url: https://twitter.com/StrataOncology
+- type: SecondaryMarket
+  name: Forge Global
   url: https://forgeglobal.com/strata-oncology_stock/
+- type: Conventions
+  url: conventions/strata-oncology-conventions.yml
+- type: Conformance
+  url: conformance/strata-oncology-conformance.yml
+- type: Lifecycle
+  url: lifecycle/strata-oncology-lifecycle.yml
+- type: Packages
+  url: packages/strata-oncology-packages.yml
+- type: LLMsTxt
+  url: llms/strata-oncology-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DomainSecurity
+  url: security/strata-oncology-domain-security.yml

@@ -1,0 +1,47 @@
+generated: '2026-08-02'
+method: derived
+status: candidate
+source: openapi/strata-oncology-content-api-openapi.yml
+note: >-
+  Strata Oncology publishes NO MCP server. Searched the provider's site, its GitHub organization and public
+  MCP registries; probed every known host for an MCP endpoint and for /.well-known/oauth-protected-resource
+  (403/404 everywhere). The tools below are a CANDIDATE surface derived from the read operations of the
+  website content API - they are a proposal, not a published server. Because no server exists, NO MCPServer
+  pointer is wired into apis.yml, and no tool crosswalk is emitted (a crosswalk requires a real MCP or
+  GraphQL surface to bind against).
+server:
+  name: strata-oncology
+  transport: null
+  url: null
+  published: false
+searched:
+- surface: provider site
+  url: https://strataoncology.com/
+  result: no MCP reference
+- surface: GitHub organization
+  url: https://github.com/StrataOncology
+  result: no MCP server repository (7 repos, 6 forks)
+- surface: /.well-known/oauth-protected-resource
+  hosts:
+  - strataoncology.com
+  - portal.strataoncology.com
+  result: 404 / 403
+tools:
+- name: list_publications
+  description: List Strata Oncology press releases and published research.
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#listPublications
+- name: get_publication
+  description: Retrieve one publication by id.
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#getPublication
+- name: list_resources
+  description: List patient and provider resource documents.
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#listResources
+- name: list_team
+  description: List Strata Oncology leadership and team profiles.
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#listTeam
+- name: list_pages
+  description: List website pages.
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#listPages
+- name: search_site
+  description: Search across all Strata Oncology site content.
+  source_operation: openapi/strata-oncology-content-api-openapi.yml#search

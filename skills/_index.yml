@@ -1,0 +1,27 @@
+generated: '2026-08-02'
+method: generated
+source: openapi/strata-oncology-content-api-openapi.yml + conventions/ + errors/
+note: >-
+  Strata Oncology publishes no AGENTS.md or skill files (searched; none found). These skills were generated
+  from the derived OpenAPI; every operationId referenced exists verbatim in that spec.
+skills:
+- file: strata-oncology-track-publications.md
+  name: Track Strata Oncology publications and press releases
+  api: openapi/strata-oncology-content-api-openapi.yml
+  operations:
+  - listPublications
+  - getPublication
+  - listTaxonomies
+  - themePublications
+- file: strata-oncology-company-profile.md
+  name: Assemble a Strata Oncology company profile
+  api: openapi/strata-oncology-content-api-openapi.yml
+  operations:
+  - listTeam
+  - getTeammember
+  - listPages
+  - getPage
+  - listResources
+  - listTestimonials
+  - search
+  - listTypes

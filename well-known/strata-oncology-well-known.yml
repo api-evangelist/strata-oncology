@@ -1,0 +1,88 @@
+generated: '2026-08-02'
+method: probed
+source: live GET probes of every known Strata Oncology host
+note: >-
+  No /.well-known/ document was found on any Strata Oncology host. Every probe below is recorded so a later
+  round does not repeat the work. Because nothing returned 200, no WellKnown, SecurityTxt or APICatalog
+  pointer is wired into apis.yml - recording an empty index as a discovery surface would misstate the
+  provider's posture.
+hosts:
+- host: https://strataoncology.com
+  server: WordPress (Apache), 404s render the site's HTML 404 page
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://www.strataoncology.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://portal.strataoncology.com
+  server: static single-page app on S3/CloudFront; unmatched paths return an S3 AccessDenied XML body
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+  - path: /.well-known/smart-configuration
+    status: 403
+  - path: /llms.txt
+    status: 403
+unresolved_hosts:
+- api.strataoncology.com
+- app.strataoncology.com
+de_facto_discovery:
+  note: >-
+    The one machine-readable discovery document Strata Oncology does serve is the WordPress REST API index,
+    not an RFC 8615 well-known path. It is captured as the source of openapi/strata-oncology-content-api-openapi.yml.
+  url: https://strataoncology.com/wp-json/
+  status: 200
+  content_type: application/json
+  namespaces:
+  - oembed/1.0
+  - cky/v1
+  - wordfence/v1
+  - yoast/v1
+  - duplicate-post/v1
+  - api
+  - google-site-kit/v1
+  - wp/v2
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  routes: 303
