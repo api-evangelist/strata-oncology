@@ -1,0 +1,364 @@
+{
+  "item": [
+    {
+      "id": "c3eda79b-c4b9-4126-a736-859cd63551e2",
+      "name": "Discovery",
+      "description": {
+        "content": "Registered types, taxonomies and statuses.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5cfadb81-bf10-4339-9e22-90947e2b1e46",
+          "name": "List types",
+          "request": {
+            "name": "List types",
+            "description": {
+              "content": "Registered content types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cdc971b1-ccaf-4212-9d66-c7f2150889cb",
+              "name": "The types response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb287819-8140-4a2d-a3ae-90292ad31e17",
+              "name": "Error response using the WordPress REST error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"rest_no_route\",\n  \"message\": \"No route was found matching the URL and request method.\",\n  \"data\": {\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bd10248-8955-4b51-8d6c-52141f35ea71",
+          "name": "List taxonomies",
+          "request": {
+            "name": "List taxonomies",
+            "description": {
+              "content": "Registered taxonomies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "taxonomies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Limit results to taxonomies associated with a specific post type."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e7f4b05-03ca-4f25-9f1d-1aa3f3858993",
+              "name": "The taxonomies response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxonomies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "309169a4-ac9d-4fc2-96d8-a785983a3eac",
+              "name": "Error response using the WordPress REST error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxonomies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"rest_no_route\",\n  \"message\": \"No route was found matching the URL and request method.\",\n  \"data\": {\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e68d5e6d-b764-4c84-a7c3-3f34f8b91550",
+          "name": "List statuses",
+          "request": {
+            "name": "List statuses",
+            "description": {
+              "content": "Registered content statuses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "statuses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb4fff7b-ba77-42f2-be62-76be35ef147d",
+              "name": "The statuses response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e99f4f0-b488-4931-87ca-e1e203ae5668",
+              "name": "Error response using the WordPress REST error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"rest_no_route\",\n  \"message\": \"No route was found matching the URL and request method.\",\n  \"data\": {\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://strataoncology.com/wp-json",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f81ab7f4-2a62-4e8e-9bfb-594b0e9e4d4a",
+    "name": "Strata Oncology Website Content Discovery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.\n\nThis is the website's content API, not a clinical or laboratory API. Strata Oncology's clinical ordering and results surface is the login-gated Strata Request Portal (https://portal.strataoncology.com/), and its EHR integration ships as the Strata Assistant app in the Epic App Orchard; neither publishes a public machine-readable contract.\n\nThis document was DERIVED by API Evangelist from the live WordPress REST discovery document at https://strataoncology.com/wp-json/ on 2026-08-02. Every path, parameter name, type, default and enum is read from that document. Only the anonymous-readable GET surface is described here; the discovery document also registers POST/PUT/PATCH/DELETE methods on these collections, but those require WordPress authentication and were not exercised.\n\nContact Support:\n Name: Strata Oncology",
+      "type": "text/plain"
+    }
+  }
+}

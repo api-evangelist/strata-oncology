@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strata Oncology Website Content Discovery API",
+    "version": "wp/v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/types"
+          },
+          "docs": "Registered content types."
+        },
+        {
+          "info": {
+            "name": "List taxonomies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/taxonomies",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to taxonomies associated with a specific post type."
+              }
+            ]
+          },
+          "docs": "Registered taxonomies."
+        },
+        {
+          "info": {
+            "name": "List statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/statuses"
+          },
+          "docs": "Registered content statuses."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

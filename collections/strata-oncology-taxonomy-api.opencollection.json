@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strata Oncology Website Content Taxonomy API",
+    "version": "wp/v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Taxonomy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/categories",
+            "params": [
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Ensure result set excludes specific IDs."
+              },
+              {
+                "name": "hide_empty",
+                "value": "",
+                "type": "query",
+                "description": "Whether to hide terms not assigned to any posts."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to specific IDs."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order sort attribute ascending or descending."
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Sort collection by term attribute."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Current page of the collection."
+              },
+              {
+                "name": "parent",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to terms assigned to a specific parent."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to be returned in result set."
+              },
+              {
+                "name": "post",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to terms assigned to a specific post."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to those matching a string."
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to terms with one or more specific slugs."
+              }
+            ]
+          },
+          "docs": "Categories taxonomy terms. Returns a JSON array; total count and page count are returned in the X-WP-Total and X-WP-TotalPages response headers and the next/prev page in Link."
+        },
+        {
+          "info": {
+            "name": "Get a single category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the category."
+              }
+            ]
+          },
+          "docs": "Retrieve one category by its numeric identifier."
+        },
+        {
+          "info": {
+            "name": "List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/tags",
+            "params": [
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Ensure result set excludes specific IDs."
+              },
+              {
+                "name": "hide_empty",
+                "value": "",
+                "type": "query",
+                "description": "Whether to hide terms not assigned to any posts."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to specific IDs."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset the result set by a specific number of items."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order sort attribute ascending or descending."
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Sort collection by term attribute."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Current page of the collection."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to be returned in result set."
+              },
+              {
+                "name": "post",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to terms assigned to a specific post."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to those matching a string."
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "Limit result set to terms with one or more specific slugs."
+              }
+            ]
+          },
+          "docs": "Tags taxonomy terms. Returns a JSON array; total count and page count are returned in the X-WP-Total and X-WP-TotalPages response headers and the next/prev page in Link."
+        },
+        {
+          "info": {
+            "name": "Get a single tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://strataoncology.com/wp-json/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the tag."
+              }
+            ]
+          },
+          "docs": "Retrieve one tag by its numeric identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

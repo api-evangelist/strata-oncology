@@ -1,0 +1,44 @@
+{
+  "provider": "strata-oncology",
+  "sources": [
+    "strata-oncology-discovery-api-openapi.yml",
+    "strata-oncology-media-api-openapi.yml",
+    "strata-oncology-pages-api-openapi.yml",
+    "strata-oncology-posts-api-openapi.yml",
+    "strata-oncology-publications-api-openapi.yml",
+    "strata-oncology-resources-api-openapi.yml",
+    "strata-oncology-search-api-openapi.yml",
+    "strata-oncology-taxonomy-api-openapi.yml",
+    "strata-oncology-team-api-openapi.yml",
+    "strata-oncology-testimonials-api-openapi.yml"
+  ],
+  "outputs": [
+    "strata-oncology-discovery-api-openapi.yml",
+    "strata-oncology-media-api-openapi.yml",
+    "strata-oncology-pages-api-openapi.yml",
+    "strata-oncology-posts-api-openapi.yml",
+    "strata-oncology-publications-api-openapi.yml",
+    "strata-oncology-resources-api-openapi.yml",
+    "strata-oncology-search-api-openapi.yml",
+    "strata-oncology-taxonomy-api-openapi.yml",
+    "strata-oncology-team-api-openapi.yml",
+    "strata-oncology-testimonials-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "strata-oncology-discovery-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-pages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-posts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-publications-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-resources-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-taxonomy-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-team-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strata-oncology-testimonials-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

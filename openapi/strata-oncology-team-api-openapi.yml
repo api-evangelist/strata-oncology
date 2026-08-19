@@ -1,0 +1,349 @@
+openapi: 3.2.0
+info:
+  title: Strata Oncology Website Content Team API
+  version: wp/v2
+  summary: Public, anonymous, read-only content API behind strataoncology.com.
+  description: 'The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.
+
+
+    This is the website''s content API, not a clinical or laboratory API. Strata Oncology''s clinical ordering and results surface is the login-gated Strata Request Portal (https://portal.strataoncology.com/), and its EHR integration ships as the Strata Assistant app in the Epic App Orchard; neither publishes a public machine-readable contract.
+
+
+    This document was DERIVED by API Evangelist from the live WordPress REST discovery document at https://strataoncology.com/wp-json/ on 2026-08-02. Every path, parameter name, type, default and enum is read from that document. Only the anonymous-readable GET surface is described here; the discovery document also registers POST/PUT/PATCH/DELETE methods on these collections, but those require WordPress authentication and were not exercised.'
+  contact:
+    name: Strata Oncology
+    url: https://strataoncology.com/contact-us/
+  x-derived-from: https://strataoncology.com/wp-json/
+  x-derived-by: API Evangelist enrichment pipeline
+  x-derived-on: '2026-08-02'
+servers:
+- url: https://strataoncology.com/wp-json
+  description: Production
+tags:
+- name: Team
+  description: Leadership and team member profiles.
+paths:
+  /team:
+    get:
+      operationId: listTeam
+      summary: List team
+      description: Leadership and team member profiles. Returns a JSON array; total count and page count are returned in the X-WP-Total and X-WP-TotalPages response headers and the next/prev page in Link.
+      tags:
+      - Team
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts published after a given ISO8601 compliant date.
+      - name: before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts published before a given ISO8601 compliant date.
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+        description: Ensure result set excludes specific IDs.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+        description: Limit result set to specific IDs.
+      - name: modified_after
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts modified after a given ISO8601 compliant date.
+      - name: modified_before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts modified before a given ISO8601 compliant date.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset the result set by a specific number of items.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - author
+          - date
+          - id
+          - include
+          - modified
+          - parent
+          - relevance
+          - slug
+          - include_slugs
+          - title
+          default: date
+        description: Sort collection by post attribute.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: search_columns
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - post_title
+            - post_content
+            - post_excerpt
+          default: []
+        description: Array of column names to be searched.
+      - name: search_semantics
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - exact
+        description: How to interpret the search input.
+      - name: slug
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Limit result set to posts with one or more specific slugs.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - publish
+            - future
+            - draft
+            - pending
+            - private
+            - trash
+            - auto-draft
+            - inherit
+            - request-pending
+            - request-confirmed
+            - request-failed
+            - request-completed
+            - acf-disabled
+            - dp-rewrite-republish
+            - email_sent
+            - email_failed
+            - email_scheduled
+            - any
+          default: publish
+        description: Limit result set to posts assigned one or more statuses.
+      responses:
+        '200':
+          description: A page of team.
+          headers:
+            X-WP-Total:
+              description: Total number of matching items.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 next/prev page links.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentItem'
+        '400':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+  /team/{id}:
+    get:
+      operationId: getTeammember
+      summary: Get a single team member
+      description: Retrieve one team member by its numeric identifier.
+      tags:
+      - Team
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier for the team member.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The requested team member.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentItem'
+        '401':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST error envelope, as observed live.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+      required:
+      - code
+      - message
+    ContentItem:
+      type: object
+      description: A WordPress REST content object. Fields observed on live anonymous responses.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier.
+        date:
+          type: string
+          description: Publication date in the site's timezone.
+        date_gmt:
+          type: string
+          description: Publication date as GMT.
+        modified:
+          type: string
+          description: Last modification date in the site's timezone.
+        modified_gmt:
+          type: string
+          description: Last modification date as GMT.
+        slug:
+          type: string
+          description: Alphanumeric identifier unique to its type.
+        status:
+          type: string
+          description: Named status.
+        type:
+          type: string
+          description: Content type name.
+        link:
+          type: string
+          format: uri
+          description: Public URL of the item.
+        guid:
+          type: object
+          description: Globally unique identifier.
+          properties:
+            rendered:
+              type: string
+        title:
+          type: object
+          description: Item title.
+          properties:
+            rendered:
+              type: string
+        content:
+          type: object
+          description: Item content.
+          properties:
+            rendered:
+              type: string
+            protected:
+              type: boolean
+        excerpt:
+          type: object
+          description: Item excerpt.
+          properties:
+            rendered:
+              type: string
+            protected:
+              type: boolean
+        featured_media:
+          type: integer
+          description: Featured media item id.
+        _links:
+          type: object
+          description: HAL-style hypermedia links to related resources.
+      required:
+      - id
+      - slug
+      - type
+      - link
+  responses:
+    Error:
+      description: Error response using the WordPress REST error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: rest_no_route
+            message: No route was found matching the URL and request method.
+            data:
+              status: 404

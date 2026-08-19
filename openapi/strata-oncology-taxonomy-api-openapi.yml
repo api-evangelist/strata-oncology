@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  title: Strata Oncology Website Content Taxonomy API
+  version: wp/v2
+  summary: Public, anonymous, read-only content API behind strataoncology.com.
+  description: 'The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.
+
+
+    This is the website''s content API, not a clinical or laboratory API. Strata Oncology''s clinical ordering and results surface is the login-gated Strata Request Portal (https://portal.strataoncology.com/), and its EHR integration ships as the Strata Assistant app in the Epic App Orchard; neither publishes a public machine-readable contract.
+
+
+    This document was DERIVED by API Evangelist from the live WordPress REST discovery document at https://strataoncology.com/wp-json/ on 2026-08-02. Every path, parameter name, type, default and enum is read from that document. Only the anonymous-readable GET surface is described here; the discovery document also registers POST/PUT/PATCH/DELETE methods on these collections, but those require WordPress authentication and were not exercised.'
+  contact:
+    name: Strata Oncology
+    url: https://strataoncology.com/contact-us/
+  x-derived-from: https://strataoncology.com/wp-json/
+  x-derived-by: API Evangelist enrichment pipeline
+  x-derived-on: '2026-08-02'
+servers:
+- url: https://strataoncology.com/wp-json
+  description: Production
+tags:
+- name: Taxonomy
+  description: Categories and tags.
+paths:
+  /categories:
+    get:
+      operationId: listCategories
+      summary: List categories
+      description: Categories taxonomy terms. Returns a JSON array; total count and page count are returned in the X-WP-Total and X-WP-TotalPages response headers and the next/prev page in Link.
+      tags:
+      - Taxonomy
+      parameters:
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+        description: Ensure result set excludes specific IDs.
+      - name: hide_empty
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: Whether to hide terms not assigned to any posts.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+        description: Limit result set to specific IDs.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - id
+          - include
+          - name
+          - slug
+          - include_slugs
+          - term_group
+          - description
+          - count
+          default: name
+        description: Sort collection by term attribute.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: parent
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Limit result set to terms assigned to a specific parent.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: post
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Limit result set to terms assigned to a specific post.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: slug
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Limit result set to terms with one or more specific slugs.
+      responses:
+        '200':
+          description: A page of categories.
+          headers:
+            X-WP-Total:
+              description: Total number of matching items.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 next/prev page links.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentItem'
+        '400':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+  /categories/{id}:
+    get:
+      operationId: getCategory
+      summary: Get a single category
+      description: Retrieve one category by its numeric identifier.
+      tags:
+      - Taxonomy
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier for the category.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The requested category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentItem'
+        '401':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+  /tags:
+    get:
+      operationId: listTags
+      summary: List tags
+      description: Tags taxonomy terms. Returns a JSON array; total count and page count are returned in the X-WP-Total and X-WP-TotalPages response headers and the next/prev page in Link.
+      tags:
+      - Taxonomy
+      parameters:
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+        description: Ensure result set excludes specific IDs.
+      - name: hide_empty
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: Whether to hide terms not assigned to any posts.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+        description: Limit result set to specific IDs.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset the result set by a specific number of items.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - id
+          - include
+          - name
+          - slug
+          - include_slugs
+          - term_group
+          - description
+          - count
+          default: name
+        description: Sort collection by term attribute.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: post
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Limit result set to terms assigned to a specific post.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: slug
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Limit result set to terms with one or more specific slugs.
+      responses:
+        '200':
+          description: A page of tags.
+          headers:
+            X-WP-Total:
+              description: Total number of matching items.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 next/prev page links.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentItem'
+        '400':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+  /tags/{id}:
+    get:
+      operationId: getTag
+      summary: Get a single tag
+      description: Retrieve one tag by its numeric identifier.
+      tags:
+      - Taxonomy
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier for the tag.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The requested tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentItem'
+        '401':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST error envelope, as observed live.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+      required:
+      - code
+      - message
+    ContentItem:
+      type: object
+      description: A WordPress REST content object. Fields observed on live anonymous responses.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier.
+        date:
+          type: string
+          description: Publication date in the site's timezone.
+        date_gmt:
+          type: string
+          description: Publication date as GMT.
+        modified:
+          type: string
+          description: Last modification date in the site's timezone.
+        modified_gmt:
+          type: string
+          description: Last modification date as GMT.
+        slug:
+          type: string
+          description: Alphanumeric identifier unique to its type.
+        status:
+          type: string
+          description: Named status.
+        type:
+          type: string
+          description: Content type name.
+        link:
+          type: string
+          format: uri
+          description: Public URL of the item.
+        guid:
+          type: object
+          description: Globally unique identifier.
+          properties:
+            rendered:
+              type: string
+        title:
+          type: object
+          description: Item title.
+          properties:
+            rendered:
+              type: string
+        content:
+          type: object
+          description: Item content.
+          properties:
+            rendered:
+              type: string
+            protected:
+              type: boolean
+        excerpt:
+          type: object
+          description: Item excerpt.
+          properties:
+            rendered:
+              type: string
+            protected:
+              type: boolean
+        featured_media:
+          type: integer
+          description: Featured media item id.
+        _links:
+          type: object
+          description: HAL-style hypermedia links to related resources.
+      required:
+      - id
+      - slug
+      - type
+      - link
+  responses:
+    Error:
+      description: Error response using the WordPress REST error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: rest_no_route
+            message: No route was found matching the URL and request method.
+            data:
+              status: 404
