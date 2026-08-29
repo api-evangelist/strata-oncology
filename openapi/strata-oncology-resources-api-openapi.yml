@@ -300,64 +300,6 @@ components:
               description: Content sections, each independently paged.
               items:
                 $ref: '#/components/schemas/ThemeSection'
-    ThemeSection:
-      type: object
-      description: One paged content section.
-      properties:
-        name:
-          type: string
-          description: Section display name.
-        btnText:
-          type: string
-          description: Call-to-action label.
-        btnParam:
-          type: string
-          description: Slug the CTA filters on.
-        currentPage:
-          type: integer
-          description: Current page number.
-        totalPosts:
-          type: integer
-          description: Total items in the section.
-        totalPages:
-          type: integer
-          description: Total pages in the section.
-        postsPerPage:
-          type: integer
-          description: Items returned per page.
-        posts:
-          type: array
-          description: Items on this page.
-          items:
-            type: object
-            properties:
-              title:
-                type: string
-              content:
-                type: string
-              permalink:
-                type: string
-                format: uri
-    Error:
-      type: object
-      description: WordPress REST error envelope, as observed live.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code, e.g. rest_no_route.
-        message:
-          type: string
-          description: Human-readable message.
-        data:
-          type: object
-          description: Error detail.
-          properties:
-            status:
-              type: integer
-              description: HTTP status code.
-      required:
-      - code
-      - message
     ContentItem:
       type: object
       description: A WordPress REST content object. Fields observed on live anonymous responses.
@@ -429,6 +371,64 @@ components:
       - slug
       - type
       - link
+    Error:
+      type: object
+      description: WordPress REST error envelope, as observed live.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+      required:
+      - code
+      - message
+    ThemeSection:
+      type: object
+      description: One paged content section.
+      properties:
+        name:
+          type: string
+          description: Section display name.
+        btnText:
+          type: string
+          description: Call-to-action label.
+        btnParam:
+          type: string
+          description: Slug the CTA filters on.
+        currentPage:
+          type: integer
+          description: Current page number.
+        totalPosts:
+          type: integer
+          description: Total items in the section.
+        totalPages:
+          type: integer
+          description: Total pages in the section.
+        postsPerPage:
+          type: integer
+          description: Items returned per page.
+        posts:
+          type: array
+          description: Items on this page.
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              content:
+                type: string
+              permalink:
+                type: string
+                format: uri
   responses:
     Error:
       description: Error response using the WordPress REST error envelope.

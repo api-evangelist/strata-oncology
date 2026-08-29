@@ -327,26 +327,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: WordPress REST error envelope, as observed live.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code, e.g. rest_no_route.
-        message:
-          type: string
-          description: Human-readable message.
-        data:
-          type: object
-          description: Error detail.
-          properties:
-            status:
-              type: integer
-              description: HTTP status code.
-      required:
-      - code
-      - message
     ContentItem:
       type: object
       description: A WordPress REST content object. Fields observed on live anonymous responses.
@@ -418,6 +398,26 @@ components:
       - slug
       - type
       - link
+    Error:
+      type: object
+      description: WordPress REST error envelope, as observed live.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+      required:
+      - code
+      - message
   responses:
     Error:
       description: Error response using the WordPress REST error envelope.
