@@ -9,6 +9,18 @@ description: 'Strata Oncology is a precision oncology company founded in 2015 by
   app distributed in the Epic App Orchard. Strata Oncology publishes no public developer program or API
   documentation; the only anonymous machine-readable surface API Evangelist could verify is the WordPress
   REST content API behind strataoncology.com.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://strataoncology.com/wp-content/uploads/2022/09/Strata-Oncology-Logo_Symbol-Dark-Theme.svg
 url: https://raw.githubusercontent.com/api-evangelist/strata-oncology/refs/heads/main/apis.yml
 x-type: company
