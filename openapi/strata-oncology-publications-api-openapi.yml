@@ -3,13 +3,7 @@ info:
   title: Strata Oncology Website Content Publications API
   version: wp/v2
   summary: Public, anonymous, read-only content API behind strataoncology.com.
-  description: 'The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.
-
-
-    This is the website''s content API, not a clinical or laboratory API. Strata Oncology''s clinical ordering and results surface is the login-gated Strata Request Portal (https://portal.strataoncology.com/), and its EHR integration ships as the Strata Assistant app in the Epic App Orchard; neither publishes a public machine-readable contract.
-
-
-    This document was DERIVED by API Evangelist from the live WordPress REST discovery document at https://strataoncology.com/wp-json/ on 2026-08-02. Every path, parameter name, type, default and enum is read from that document. Only the anonymous-readable GET surface is described here; the discovery document also registers POST/PUT/PATCH/DELETE methods on these collections, but those require WordPress authentication and were not exercised.'
+  description: The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.
   contact:
     name: Strata Oncology
     url: https://strataoncology.com/contact-us/
@@ -282,24 +276,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    ThemeSectionsResponse:
-      type: object
-      description: Envelope returned by the custom `api` namespace endpoints.
-      properties:
-        success:
-          type: boolean
-          description: Whether the request succeeded.
-        data:
-          type: object
-          properties:
-            layout:
-              type: string
-              description: Layout key used by the theme.
-            sections:
-              type: array
-              description: Content sections, each independently paged.
-              items:
-                $ref: '#/components/schemas/ThemeSection'
     ContentItem:
       type: object
       description: A WordPress REST content object. Fields observed on live anonymous responses.
@@ -391,6 +367,24 @@ components:
       required:
       - code
       - message
+    ThemeSectionsResponse:
+      type: object
+      description: Envelope returned by the custom `api` namespace endpoints.
+      properties:
+        success:
+          type: boolean
+          description: Whether the request succeeded.
+        data:
+          type: object
+          properties:
+            layout:
+              type: string
+              description: Layout key used by the theme.
+            sections:
+              type: array
+              description: Content sections, each independently paged.
+              items:
+                $ref: '#/components/schemas/ThemeSection'
     ThemeSection:
       type: object
       description: One paged content section.

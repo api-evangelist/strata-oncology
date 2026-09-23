@@ -3,13 +3,7 @@ info:
   title: Strata Oncology Website Content Taxonomy API
   version: wp/v2
   summary: Public, anonymous, read-only content API behind strataoncology.com.
-  description: 'The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.
-
-
-    This is the website''s content API, not a clinical or laboratory API. Strata Oncology''s clinical ordering and results surface is the login-gated Strata Request Portal (https://portal.strataoncology.com/), and its EHR integration ships as the Strata Assistant app in the Epic App Orchard; neither publishes a public machine-readable contract.
-
-
-    This document was DERIVED by API Evangelist from the live WordPress REST discovery document at https://strataoncology.com/wp-json/ on 2026-08-02. Every path, parameter name, type, default and enum is read from that document. Only the anonymous-readable GET surface is described here; the discovery document also registers POST/PUT/PATCH/DELETE methods on these collections, but those require WordPress authentication and were not exercised.'
+  description: The public read surface of the WordPress REST API that powers strataoncology.com, plus the two custom `api` namespace endpoints the site theme calls to render its News & Publications and Resources pages.
   contact:
     name: Strata Oncology
     url: https://strataoncology.com/contact-us/
@@ -330,7 +324,39 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: Error response using the WordPress REST error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: rest_no_route
+            message: No route was found matching the URL and request method.
+            data:
+              status: 404
   schemas:
+    Error:
+      type: object
+      description: WordPress REST error envelope, as observed live.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+      required:
+      - code
+      - message
     ContentItem:
       type: object
       description: A WordPress REST content object. Fields observed on live anonymous responses.
@@ -402,35 +428,3 @@ components:
       - slug
       - type
       - link
-    Error:
-      type: object
-      description: WordPress REST error envelope, as observed live.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code, e.g. rest_no_route.
-        message:
-          type: string
-          description: Human-readable message.
-        data:
-          type: object
-          description: Error detail.
-          properties:
-            status:
-              type: integer
-              description: HTTP status code.
-      required:
-      - code
-      - message
-  responses:
-    Error:
-      description: Error response using the WordPress REST error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: rest_no_route
-            message: No route was found matching the URL and request method.
-            data:
-              status: 404
