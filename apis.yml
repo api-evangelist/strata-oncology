@@ -60,146 +60,20 @@ tags:
 - Biomarkers
 - Clinical Trials
 apis:
-- aid: strata-oncology:strata-oncology-discovery-api
-  name: Strata Oncology Discovery API
-  description: Registered types, taxonomies and statuses.
-  humanURL: https://strataoncology.com/wp-json/
+- aid: strata-oncology:strataoncology-com-website-wordpress-rest
+  name: Strata Oncology Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the Strata Oncology website at strataoncology.com:
+    the route index of the site''s content management system, catalogued as one site surface rather than
+    as separate APIs.'
   baseURL: https://strataoncology.com/wp-json
   tags:
-  - Discovery
+  - WordPress
+  x-surface: platform-generated
   properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-discovery-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-media-api
-  name: Strata Oncology Media API
-  description: Uploaded media items.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Media
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-media-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-pages-api
-  name: Strata Oncology Pages API
-  description: Website pages.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Pages
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-pages-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-posts-api
-  name: Strata Oncology Posts API
-  description: Blog posts.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Posts
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-posts-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-publications-api
-  name: Strata Oncology Publications API
-  description: Press releases and published research.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Publications
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-publications-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-resources-api
-  name: Strata Oncology Resources API
-  description: Patient and provider resource documents.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Resources
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-resources-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-search-api
-  name: Strata Oncology Search API
-  description: Cross-content-type search.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Search
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-search-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-taxonomy-api
-  name: Strata Oncology Taxonomy API
-  description: Categories and tags.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Taxonomy
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-taxonomy-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-team-api
-  name: Strata Oncology Team API
-  description: Leadership and team member profiles.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Team
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-team-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
-- aid: strata-oncology:strata-oncology-testimonials-api
-  name: Strata Oncology Testimonials API
-  description: Published testimonials.
-  humanURL: https://strataoncology.com/wp-json/
-  baseURL: https://strataoncology.com/wp-json
-  tags:
-  - Testimonials
-  properties:
-  - type: OpenAPI
-    url: openapi/strata-oncology-testimonials-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/strata-oncology-problem-types.yml
-  - type: DataModel
-    url: data-model/strata-oncology-data-model.yml
+  - type: Documentation
+    url: https://strataoncology.com/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -263,3 +137,7 @@ common:
   url: skills/_index.yml
 - type: DomainSecurity
   url: security/strata-oncology-domain-security.yml
+- type: ErrorCatalog
+  url: errors/strata-oncology-problem-types.yml
+- type: DataModel
+  url: data-model/strata-oncology-data-model.yml
